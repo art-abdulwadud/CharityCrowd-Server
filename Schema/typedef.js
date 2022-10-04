@@ -1,33 +1,14 @@
 const { gql } = require("apollo-server-express");
+const { userTypes, userQueries } = require("./defs/users");
 
 const typeDefs = gql`
     # Scalars
 
     # Types
-
-    type ProcessingStore {
-        status: Boolean
-        requestId: String
-    }
-    type User {
-        id: ID
-        name: String!
-        email: String!
-        admin: Boolean
-        owner: Boolean
-        staff: Boolean
-        userId: String
-    }
+    ${userTypes}
 
     # Queries
-
-    type Query {
-        getUserProfile(userid: String!): User!
-    }
-
-    type Query {
-        signUpUser(user: UserDetails!): User!
-    }
+    ${userQueries}
 
     # Mutations
 `;
