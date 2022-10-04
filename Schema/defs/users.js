@@ -1,12 +1,9 @@
 const userTypes = `
     type User {
-        id: ID
+        id: ID!
         name: String!
         email: String!
         admin: Boolean
-        owner: Boolean
-        staff: Boolean
-        userId: String
     }
 `;
 
@@ -16,7 +13,7 @@ const userQueries = `
     }
     
     type Query {
-        signUpUser(user: UserDetails!): User!
+        signUpUser(email: String!, password: String!): User!
     }
 `;
 

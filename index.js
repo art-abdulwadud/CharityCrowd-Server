@@ -1,7 +1,7 @@
 const { ApolloServer } = require("apollo-server-express");
 const { ApolloServerPluginLandingPageLocalDefault } = require("apollo-server-core");
-const typeDefs = require("./Schema/TypeDefs");
-const resolvers = require("./Schema/Resolvers");
+const typeDefs = require("./Schema/typedef");
+const resolvers = require("./Schema/resolvers");
 const express = require("express");
 const app = express();
 const cors = require("cors");
