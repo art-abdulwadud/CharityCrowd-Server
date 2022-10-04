@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const { admin } = require("../../admin");
 const { addToServerDb } = require("../../globalFuncs");
+const { ApolloError } = require("apollo-server-express");
 
 let users = [];
 const usersDBPath = path.resolve("./Schema/data/users.json");
@@ -45,8 +46,7 @@ const userResolvers = {
             }, user.uid, "users"], "New user registered");
             return userDoc;
         } catch (error) {
-            console.log(error.message);
-            return error.message;
+            throw new ApolloError(error.message);
         }
     }
 };
