@@ -106,3 +106,4 @@ dist
 Schema/data
 
 key/
+/config.env
