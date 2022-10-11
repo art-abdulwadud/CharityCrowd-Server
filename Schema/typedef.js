@@ -1,4 +1,5 @@
 const { gql } = require("apollo-server-express");
+const { authQueries } = require("./defs/auth");
 const { userTypes, userQueries } = require("./defs/users");
 
 const typeDefs = gql`
@@ -9,6 +10,7 @@ const typeDefs = gql`
 
     # Queries
     ${userQueries}
+    ${authQueries}
 
     # Mutations
 `;

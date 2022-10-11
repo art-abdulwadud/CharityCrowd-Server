@@ -1,5 +1,6 @@
 /* eslint-disable use-isnan */
 // const { db } = require("../admin");
+const { authResolvers } = require("./resolvers/authResolvers");
 const { userResolvers } = require("./resolvers/userResolvers");
 
 const resolvers = {
@@ -7,7 +8,8 @@ const resolvers = {
 
     // Queries
     Query: {
-        ...userResolvers
+        ...userResolvers,
+        ...authResolvers
     },
 
     // Mutations
