@@ -43,7 +43,11 @@ const userResolvers = {
                 email: email, 
                 name: email.split("@")[0], 
                 id: user.uid 
-            }, user.uid, "users"], "New user registered");
+            }, user.uid, "users"], "New user registered", () => users = [...users, { 
+                email: email, 
+                name: email.split("@")[0], 
+                id: user.uid 
+            }]);
             return userDoc;
         } catch (error) {
             throw new ApolloError(error.message);

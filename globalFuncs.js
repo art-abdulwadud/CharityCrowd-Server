@@ -1,7 +1,7 @@
 const fs = require("fs");
 const { db } = require("./admin");
 
-const addToServerDb = async (mypath, [arr,newObj,docId,collection], message) => {
+const addToServerDb = async (mypath, [arr,newObj,docId,collection], message, callback) => {
     try {
         const newItem = docId ? await db.collection(collection).doc(docId).set(newObj)
             : await db.collection(collection).add(newObj);
@@ -11,6 +11,7 @@ const addToServerDb = async (mypath, [arr,newObj,docId,collection], message) => 
             }
             console.log(message);
         });
+        callback();
         return { ...newObj, id: docId || newItem.id };
     } catch (error) {
         return error.message;
