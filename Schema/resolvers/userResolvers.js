@@ -48,6 +48,17 @@ const userResolvers = {
         } catch (error) {
             throw new ApolloError(error.message);
         }
+    },
+    getAllUsers : async (_root, args) => {
+        try {
+            const fetchedUser = await admin.auth().getUserByEmail(args.email);
+            if (fetchedUser.customClaims && fetchedUser.customClaims.admin === true) {
+                return users;
+            }
+            throw new ApolloError("Unauthorised request");
+        } catch (error) {
+            throw new ApolloError(error.message);
+        }
     }
 };
 

@@ -15,6 +15,10 @@ const userQueries = `
     type Query {
         signUpUser(email: String!, password: String!): User!
     }
+
+    type Query {
+        getAllUsers(email: String!): [User!]!
+    }
 `;
 
 module.exports = { userTypes, userQueries };
