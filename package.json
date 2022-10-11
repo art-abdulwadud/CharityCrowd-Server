@@ -6,7 +6,7 @@
   "author": "art-abdulwadud <abdulwadudhajike@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "apollo-server-core": "^3.10.2",
