@@ -1,1 +1,3 @@
-const { fetchData } = require("./globalFuncs");
+const { reFetchData } = require("./globalFuncs");
+
+reFetchData("users", "users");

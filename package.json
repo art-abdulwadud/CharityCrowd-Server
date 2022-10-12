@@ -6,7 +6,8 @@
   "author": "art-abdulwadud <abdulwadudhajike@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "build": "node dbFunctions && git add . && git commit -m 'update json files' && git push heroku main"
   },
   "dependencies": {
     "apollo-server-core": "^3.10.2",
