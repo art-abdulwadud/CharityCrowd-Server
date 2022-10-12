@@ -19,6 +19,14 @@ const userQueries = `
     type Query {
         getAllUsers(email: String!): [User!]!
     }
+
+    type Role {
+        admin: Boolean!
+    }
+
+    type Query {
+        getUserRole(email: String!): Role!
+    }
 `;
 
 module.exports = { userTypes, userQueries };

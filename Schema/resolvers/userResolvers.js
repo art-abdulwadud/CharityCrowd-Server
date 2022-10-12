@@ -63,6 +63,20 @@ const userResolvers = {
         } catch (error) {
             throw new ApolloError(error.message);
         }
+    },
+    getUserRole : async (_root, args) => {
+        try {
+            const fetchedUser = await admin.auth().getUserByEmail(args.email);
+            if (fetchedUser.customClaims && fetchedUser.customClaims.admin === true) {
+                let currentUser = { admin: false };
+                const fetchedUser = await admin.auth().getUserByEmail(args.email);
+                if (fetchedUser.customClaims && fetchedUser.customClaims.admin === true) currentUser = { admin: true };
+                return currentUser;
+            }
+            throw new ApolloError("Unauthorised request");
+        } catch (error) {
+            throw new ApolloError(error.message);
+        }
     }
 };
 
