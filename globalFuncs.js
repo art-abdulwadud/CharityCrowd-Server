@@ -18,4 +18,44 @@ const addToServerDb = async (mypath, [arr,newObj,docId,collection], message, cal
     }
 };
 
-module.exports = { addToServerDb };
+const fetchData = async (collectionName, jsonName) => {
+    try {
+        let savedData = [];
+        let collectionData = await db.collection(collectionName).get();
+        collectionData.forEach(key => {
+            // make sure to check if field is timeStamp/timestamp
+            savedData.push({ id: key.id, ...key.data(), timestamp: key.data().timestamp.toDate() });
+        });
+        fs.writeFile(`${jsonName}.json`, JSON.stringify(savedData), (err) => {
+            if (err) {
+                throw err;
+            }
+            console.log("JSON data is saved.");
+        });
+    } catch (error) {
+        console.log(error.message);
+    }
+};
+
+const reFetchData = async (collectionName, jsonName, currentList) => {
+    try {
+        let savedData = [];
+        let collectionData = await db.collection(collectionName)
+            .where("timestamp",">",currentList[currentList.length - 1].timestamp)
+            .get();
+        collectionData.forEach(key => {
+            // make sure to check if field is timeStamp/timestamp
+            savedData.push({ id: key.id, ...key.data(), timestamp: key.data().timestamp.toDate() });
+        });
+        fs.writeFile(`${jsonName}.json`, JSON.stringify(savedData), (err) => {
+            if (err) {
+                throw err;
+            }
+            console.log("JSON data is saved.");
+        });
+    } catch (error) {
+        console.log(error.message);
+    }
+};
+
+module.exports = { addToServerDb, fetchData, reFetchData };

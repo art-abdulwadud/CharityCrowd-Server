@@ -42,11 +42,13 @@ const userResolvers = {
             const userDoc = await addToServerDb(usersDBPath, [users,{ 
                 email: email, 
                 name: email.split("@")[0], 
-                id: user.uid 
+                id: user.uid,
+                timestamp: new Date(Date.now())
             }, user.uid, "users"], "New user registered", () => users = [...users, { 
                 email: email, 
                 name: email.split("@")[0], 
-                id: user.uid 
+                id: user.uid,
+                timestamp: new Date(Date.now())
             }]);
             return userDoc;
         } catch (error) {
