@@ -10,7 +10,7 @@ const authQueries = `
     }
 
     type Query {
-        addCustomClaim(userid: ID!, claim: Obj!): String
+        addCustomClaim(currentUser: String!, userid: ID!, claim: Obj!): String
     }
 `;
 
