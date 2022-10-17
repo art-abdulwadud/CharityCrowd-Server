@@ -13,7 +13,9 @@ const dotenv = require("dotenv");
     dotenv.config({ path: "./config.env" });
     app.use((req, res, next) => {
     // Website you wish to allow to connect
-        res.setHeader("Access-Control-Allow-Origin", "https://fund-project.netlify.app");
+        //http://localhost:8000
+        // https://fund-project.netlify.app
+        res.setHeader("Access-Control-Allow-Origin", "http://localhost:8000");
         // Pass to next layer of middleware
         next();
     });
