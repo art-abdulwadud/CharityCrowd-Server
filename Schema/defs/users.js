@@ -25,7 +25,7 @@ const userQueries = `
     }
 
     type Query {
-        getUserRole(email: String!): Role!
+        getUserRole(currentUser: String!, requestedUser: String!): Role!
     }
 `;
 
