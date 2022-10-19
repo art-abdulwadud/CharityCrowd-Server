@@ -20,6 +20,7 @@ const projectResolvers = {
             const { project, currentUser } = args;
             const fetchedUser = await admin.auth().getUserByEmail(currentUser);
             if (fetchedUser.customClaims && fetchedUser.customClaims.admin === true) {
+                // TODO : make all values of the project argument lowercase from frontend
                 const addedProject = await addToServerDb(projectsDBPath, [projects, { 
                     ...project, 
                     currentAmount: 0, 

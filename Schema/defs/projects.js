@@ -4,7 +4,7 @@ const projectTypes = `
         amount: String!
         timestamp: String!
     }
-    type Oragnizer {
+    type Organizer {
         name: String!
         type: String!
         location: String!
@@ -27,8 +27,21 @@ const projectTypes = `
 `;
 
 const projectQueries = `
+    input OrganizerInput {
+        name: String!
+        type: String!
+        location: String
+        email: String
+    }
+    input ProjectInput {
+        name: String!
+        description: String!
+        requiredAmount: Float!
+        organizer: OrganizerInput
+        beneficiary: OrganizerInput
+    }
     type Query {
-        addAProject(userid: String!): String!
+        addAProject(currentUser: String!, project: ProjectInput!): Project!
     }
 `;
 
