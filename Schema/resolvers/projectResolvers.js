@@ -1,7 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const { admin } = require("../../admin");
-const { addToServerDb } = require("../../globalFuncs");
+const { admin, db } = require("../../admin");
 const { ApolloError } = require("apollo-server-express");
 
 let projects = [];
@@ -21,18 +20,30 @@ const projectResolvers = {
             const fetchedUser = await admin.auth().getUserByEmail(currentUser);
             if (fetchedUser.customClaims && fetchedUser.customClaims.admin === true) {
                 // TODO : make all values of the project argument lowercase from frontend
-                const addedProject = await addToServerDb(projectsDBPath, [projects, { 
+                const today = new Date(Date.now());
+                const newItem = await db.collection("projects").add({
                     ...project, 
                     currentAmount: 0, 
-                    timestamp: new Date(Date.now()), 
+                    timestamp: today, 
                     numberOfDonations: 0 
-                }, null, "projects"], "New Project Added", () => projects = [...projects, { 
-                    ...project, 
+                });
+                fs.writeFile(projectsDBPath, JSON.stringify([...projects, { 
+                    id: newItem.id,
                     currentAmount: 0, 
-                    timestamp: new Date(Date.now()), 
+                    timestamp: today, 
                     numberOfDonations: 0 
-                }]);
-                return addedProject;
+                }]), (err) => {
+                    if (err) {
+                        throw err;
+                    }
+                    console.log("Added to server database");
+                });
+                return { 
+                    id: newItem.id,
+                    currentAmount: 0, 
+                    timestamp: today, 
+                    numberOfDonations: 0 
+                };
             }
             return new ApolloError("Unauthorised Action");
         } catch (error) {
