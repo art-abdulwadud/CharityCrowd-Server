@@ -38,6 +38,13 @@ const projectResolvers = {
         } catch (error) {
             throw new ApolloError(error.message);
         }
+    },
+    getAllProjects: async () => {
+        try {
+            return projects.sort((ab, dc) => dc.timestamp - ab.timestamp);
+        } catch (error) {
+            throw new ApolloError(error.message);
+        }
     } 
 };
 

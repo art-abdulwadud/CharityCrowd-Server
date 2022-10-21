@@ -41,6 +41,10 @@ const projectQueries = `
     type Query {
         addAProject(currentUser: String!, project: ProjectInput!): Project!
     }
+
+    type Query {
+        getAllProjects: [Project]!
+    }
 `;
 
 module.exports = { projectTypes, projectQueries };
