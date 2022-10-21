@@ -28,7 +28,6 @@ const projectTypes = `
 const projectQueries = `
     input OrganizerInput {
         name: String!
-        type: String!
         location: String
         email: String
     }
