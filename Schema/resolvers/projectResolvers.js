@@ -28,6 +28,7 @@ const projectResolvers = {
                     numberOfDonations: 0 
                 });
                 const updatedProjects = [...projects, { 
+                    ...project,
                     id: newItem.id,
                     currentAmount: 0, 
                     timestamp: today, 
@@ -41,6 +42,7 @@ const projectResolvers = {
                     console.log("Added to server database");
                 });
                 return { 
+                    ...project,
                     id: newItem.id,
                     currentAmount: 0, 
                     timestamp: today, 
