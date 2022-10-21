@@ -6,7 +6,6 @@ const projectTypes = `
     }
     type Organizer {
         name: String!
-        type: String!
         location: String!
         email: String
     }
