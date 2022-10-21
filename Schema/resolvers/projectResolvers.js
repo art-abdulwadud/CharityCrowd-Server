@@ -27,12 +27,14 @@ const projectResolvers = {
                     timestamp: today, 
                     numberOfDonations: 0 
                 });
-                fs.writeFile(projectsDBPath, JSON.stringify([...projects, { 
+                const updatedProjects = [...projects, { 
                     id: newItem.id,
                     currentAmount: 0, 
                     timestamp: today, 
                     numberOfDonations: 0 
-                }]), (err) => {
+                }];
+                projects = updatedProjects;
+                fs.writeFile(projectsDBPath, JSON.stringify(updatedProjects), (err) => {
                     if (err) {
                         throw err;
                     }
