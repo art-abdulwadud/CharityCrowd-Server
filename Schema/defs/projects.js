@@ -45,6 +45,10 @@ const projectQueries = `
     type Query {
         getAllProjects: [Project]!
     }
+
+    type Query {
+        getProjectById(projectid: ID!): Project!
+    }
 `;
 
 module.exports = { projectTypes, projectQueries };

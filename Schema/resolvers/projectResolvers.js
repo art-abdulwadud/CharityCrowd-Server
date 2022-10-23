@@ -60,6 +60,15 @@ const projectResolvers = {
         } catch (error) {
             throw new ApolloError(error.message);
         }
+    },
+    getProjectById: async (_root, args) => {
+        try {
+            let requestedProject = {};
+            projects.forEach((key) => key.id === args.projectid ? requestedProject = key : null);
+            return requestedProject;
+        } catch (error) {
+            throw new ApolloError(error.message);
+        }
     } 
 };
 
