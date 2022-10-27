@@ -4,8 +4,9 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
     name: String,
     email: String,
-    admin: Boolean
-});
+    admin: Boolean,
+    userId: String
+}, { timestamps: true });
 
 const User = mongoose.model("User", userSchema);
 
