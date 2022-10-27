@@ -1,8 +1,9 @@
 /* eslint-disable no-undef */
 const admin = require("firebase-admin");
-const dotenv = require("dotenv");
+if (process.env.NODE_ENV !== "production") {
+    require("dotenv").config({ path: "./.env" });
+}
 
-dotenv.config({ path: "./config.env" });
 const serviceAccount = {
     type: "service_account",
     project_id: process.env.project_id,
