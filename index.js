@@ -6,17 +6,14 @@ const resolvers = require("./Schema/resolvers");
 const express = require("express");
 const app = express();
 const cors = require("cors");
-if (process.env.NODE_ENV !== "production") {
-    require("dotenv").config({ path: "./.env" });
-}
+const dotenv = require("dotenv");
 
 (async () => {
     app.use(cors({ origin: true }));
+    dotenv.config({ path: "./config.env" });
     app.use((req, res, next) => {
     // Website you wish to allow to connect
-        //http://localhost:8000
-        // https://fund-project.netlify.app
-        res.setHeader("Access-Control-Allow-Origin", "http://localhost:8000");
+        res.setHeader("Access-Control-Allow-Origin", "https://fund-project.netlify.app");
         // Pass to next layer of middleware
         next();
     });
