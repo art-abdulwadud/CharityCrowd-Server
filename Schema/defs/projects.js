@@ -10,7 +10,7 @@ const projectTypes = `
         email: String
     }
     type Project {
-        id: ID!
+        _id: ID!
         name: String!
         requiredAmount: Float!
         currentAmount: Float!
