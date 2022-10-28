@@ -1,7 +1,8 @@
 const fs = require("fs");
 const path = require("path");
-const { admin, db } = require("../../admin");
+const { admin } = require("../../admin");
 const { ApolloError } = require("apollo-server-express");
+const Project = require("../../Models/projectModel");
 
 let projects = [];
 const projectsDBPath = path.resolve("./Schema/data/projects.json");
@@ -19,35 +20,13 @@ const projectResolvers = {
             const { project, currentUser } = args;
             const fetchedUser = await admin.auth().getUserByEmail(currentUser);
             if (fetchedUser.customClaims && fetchedUser.customClaims.admin === true) {
-                // TODO : make all values of the project argument lowercase from frontend
-                const today = new Date(Date.now());
-                const newItem = await db.collection("projects").add({
+                const projectDoc = new Project({
                     ...project, 
                     currentAmount: 0, 
-                    timestamp: today, 
                     numberOfDonations: 0 
                 });
-                const updatedProjects = [...projects, { 
-                    ...project,
-                    id: newItem.id,
-                    currentAmount: 0, 
-                    timestamp: today, 
-                    numberOfDonations: 0 
-                }];
-                projects = updatedProjects;
-                fs.writeFile(projectsDBPath, JSON.stringify(updatedProjects), (err) => {
-                    if (err) {
-                        throw err;
-                    }
-                    console.log("Added to server database");
-                });
-                return { 
-                    ...project,
-                    id: newItem.id,
-                    currentAmount: 0, 
-                    timestamp: today, 
-                    numberOfDonations: 0 
-                };
+                await projectDoc.save();
+                return projectDoc;
             }
             return new ApolloError("Unauthorised Action");
         } catch (error) {
