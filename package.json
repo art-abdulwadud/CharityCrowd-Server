@@ -8,7 +8,8 @@
   "scripts": {
     "start": "node index.js",
     "custom": "node dbFunctions && git add . && git commit -m 'update json files' && git push heroku main",
-    "custom2": "git push heroku main"
+    "custom2": "git push heroku main",
+    "dev": "nodemon index.js"
   },
   "dependencies": {
     "apollo-server-core": "^3.10.2",

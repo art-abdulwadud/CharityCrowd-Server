@@ -1,6 +1,6 @@
 const userTypes = `
     type User {
-        id: ID!
+        _id: ID!
         name: String!
         email: String!
         admin: Boolean
