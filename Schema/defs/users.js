@@ -11,15 +11,11 @@ const userTypes = `
 
 const userQueries = `
     type Query {
-        getUserProfile(userid: String!): User!
-    }
-    
-    type Query {
         signUpUser(email: String!, password: String!): User!
     }
 
     type Query {
-        getAllUsers(email: String!): [User!]!
+        getUserProfile(userid: String!): User!
     }
 
     type Role {
@@ -28,6 +24,14 @@ const userQueries = `
 
     type Query {
         getUserRole(currentUser: String!, requestedUser: String!): Role!
+    }
+
+    type Query {
+        getRecentUsers(email: String!): [User!]!
+    }
+
+    type Query {
+        getAdminUsers(email: String!): [User!]!
     }
 `;
 
