@@ -35,7 +35,8 @@ const projectResolvers = {
     },
     getAllProjects: async () => {
         try {
-            return projects.sort((ab, dc) => new Date(dc.timestamp) - new Date(ab.timestamp));
+            const projectList = await Project.find().sort({ createdAt: -1 });
+            return projectList;
         } catch (error) {
             throw new ApolloError(error.message);
         }
