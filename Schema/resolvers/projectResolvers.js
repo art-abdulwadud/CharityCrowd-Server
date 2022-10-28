@@ -1,18 +1,6 @@
-const fs = require("fs");
-const path = require("path");
 const { admin } = require("../../admin");
 const { ApolloError } = require("apollo-server-express");
 const Project = require("../../Models/projectModel");
-
-let projects = [];
-const projectsDBPath = path.resolve("./Schema/data/projects.json");
-fs.readFile(projectsDBPath, "utf8", (err, jsonString) => {
-    if (err) {
-        console.log("File read failed:", err);
-        return;
-    }
-    projects = JSON.parse(jsonString);
-});
 
 const projectResolvers = {
     addAProject : async (_root, args) => {
@@ -43,8 +31,7 @@ const projectResolvers = {
     },
     getProjectById: async (_root, args) => {
         try {
-            let requestedProject = {};
-            projects.forEach((key) => key.id === args.projectid ? requestedProject = key : null);
+            const requestedProject = await Project.findById(args.projectid);
             return requestedProject;
         } catch (error) {
             throw new ApolloError(error.message);
