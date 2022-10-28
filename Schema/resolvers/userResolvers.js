@@ -1,18 +1,6 @@
-const fs = require("fs");
-const path = require("path");
 const { admin } = require("../../admin");
 const { ApolloError } = require("apollo-server-express");
 const User = require("../../Models/userModel");
-
-let users = [];
-const usersDBPath = path.resolve("./Schema/data/users.json");
-fs.readFile(usersDBPath, "utf8", (err, jsonString) => {
-    if (err) {
-        console.log("File read failed:", err);
-        return;
-    }
-    users = JSON.parse(jsonString);
-});
 
 const userResolvers = {
     getUserProfile : async (_root, args) => {
@@ -49,11 +37,23 @@ const userResolvers = {
             throw new ApolloError(error.message);
         }
     },
-    getAllUsers : async (_root, args) => {
+    getRecentUsers : async (_root, args) => {
         try {
             const fetchedUser = await admin.auth().getUserByEmail(args.email);
             if (fetchedUser.customClaims && fetchedUser.customClaims.admin === true) {
-                const userList = await User.find();
+                const userList = await User.find().sort({ createdAt: -1 });
+                return userList;
+            }
+            throw new ApolloError("Unauthorised request");
+        } catch (error) {
+            throw new ApolloError(error.message);
+        }
+    },
+    getAdminUsers : async (_root, args) => {
+        try {
+            const fetchedUser = await admin.auth().getUserByEmail(args.email);
+            if (fetchedUser.customClaims && fetchedUser.customClaims.admin === true) {
+                const userList = await User.find().where("admin").equals(true);
                 return userList;
             }
             throw new ApolloError("Unauthorised request");
