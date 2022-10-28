@@ -1,5 +1,6 @@
 const { admin } = require("../../admin");
 const { ApolloError } = require("apollo-server-express");
+const User = require("../../Models/userModel");
 
 const authResolvers = {
     addCustomClaim : async (_root, args) => {
@@ -7,6 +8,9 @@ const authResolvers = {
             const currentUser = await admin.auth().getUserByEmail(args.currentUser);
             if (currentUser.customClaims && currentUser.customClaims.admin === true) {
                 await admin.auth().setCustomUserClaims(args.userid, { ...args.claim });
+                const user = await User.findById(args.userid);
+                user[Object.keys(args.claim)[0]] = Object.values(args.claim)[0];
+                await user.save();
                 return "Success";
             }
             throw new ApolloError("Unauthorised request");
