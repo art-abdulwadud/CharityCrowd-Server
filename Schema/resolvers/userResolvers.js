@@ -17,16 +17,11 @@ fs.readFile(usersDBPath, "utf8", (err, jsonString) => {
 const userResolvers = {
     getUserProfile : async (_root, args) => {
         try {
-            let currentUser = {};
-            users.forEach((user) => user.id === args.userid ? currentUser = user : null);
-            
-            const usersDoc = await User.findOne({"userId" : {$regex : "4H"}});
-            console.log(usersDoc);
-            
+            const userDoc = await User.findOne({ _id: args.userid });
+            const { name, email, _id, createdAt, updatedAt } = userDoc;
+            let currentUser = { name: name, email: email, _id: _id, createdAt: createdAt, updatedAt: updatedAt };
             const fetchedUser = await admin.auth().getUserByEmail(currentUser.email);
             if (fetchedUser.customClaims && fetchedUser.customClaims.admin === true) currentUser = { ...currentUser, admin: true };
-            if (fetchedUser.customClaims && fetchedUser.customClaims.owner === true) currentUser = { ...currentUser, owner: true };
-            if (fetchedUser.customClaims && fetchedUser.customClaims.staff === true) currentUser = { ...currentUser, staff: true };
             return currentUser;
         } catch (error) {
             console.log(error.message);
