@@ -19,14 +19,10 @@ const userResolvers = {
         try {
             let currentUser = {};
             users.forEach((user) => user.id === args.userid ? currentUser = user : null);
-            const usersDoc = await User.findOne({ userId: args.userid });
+            
+            const usersDoc = await User.findOne({"userId" : {$regex : "4H"}});
             console.log(usersDoc);
-            // const userDoc = new User({
-            //     email: "abdiwadudhaji@gmail.com", 
-            //     name: "abdiwadudhaji",
-            //     userId: "4HKjosOWfgOEvPIVUrdbqDRNdJA3"
-            // });
-            // await userDoc.save();
+            
             const fetchedUser = await admin.auth().getUserByEmail(currentUser.email);
             if (fetchedUser.customClaims && fetchedUser.customClaims.admin === true) currentUser = { ...currentUser, admin: true };
             if (fetchedUser.customClaims && fetchedUser.customClaims.owner === true) currentUser = { ...currentUser, owner: true };
@@ -48,12 +44,12 @@ const userResolvers = {
             };
             const user = await admin.auth().createUser(newUserObj);
             const userDoc = new User({
+                _id: user.uid,
                 email: email, 
-                name: email.split("@")[0],
-                userId: user.uid
+                name: email.split("@")[0]
             });
-            const newUser = await userDoc.save();
-            return newUser;
+            await userDoc.save();
+            return userDoc;
         } catch (error) {
             throw new ApolloError(error.message);
         }
@@ -62,7 +58,8 @@ const userResolvers = {
         try {
             const fetchedUser = await admin.auth().getUserByEmail(args.email);
             if (fetchedUser.customClaims && fetchedUser.customClaims.admin === true) {
-                return users;
+                const userList = await User.find();
+                return userList;
             }
             throw new ApolloError("Unauthorised request");
         } catch (error) {
