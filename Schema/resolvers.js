@@ -13,7 +13,6 @@ const resolvers = {
         ...authResolvers,
         ...projectResolvers
     },
-
     // Mutations
 };
 
