@@ -3,8 +3,8 @@ const userTypes = `
         _id: ID!
         name: String!
         email: String!
-        admin: Boolean,
-        createdAt: String,
+        admin: Boolean
+        createdAt: String
         updatedAt: String
     }
 `;

@@ -1,8 +1,8 @@
 const projectTypes = `
     type Donation {
-        name: String!
-        amount: String!
-        timestamp: String!
+        name: String
+        amount: String
+        timestamp: String
     }
     type Organizer {
         name: String!
@@ -22,6 +22,8 @@ const projectTypes = `
         organizer: Organizer
         beneficiary: Organizer
         numberOfDonations: Int!
+        createdAt: String
+        updatedAt: String
     }
 `;
 
