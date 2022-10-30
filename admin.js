@@ -4,12 +4,11 @@ if (process.env.NODE_ENV !== "production") {
     require("dotenv").config({ path: "./.env" });
 }
 
-const { privateKey } = JSON.parse(process.env.private_key);
 const serviceAccount = {
     type: "service_account",
     project_id: process.env.project_id,
     private_key_id: process.env.private_key_id,
-    private_key: privateKey.replace(/\\n/g, "\n"),
+    private_key: process.env.private_key,
     client_email: process.env.client_email,
     client_id: process.env.client_id,
     auth_uri: process.env.auth_uri,
