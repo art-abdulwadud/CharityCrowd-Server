@@ -24,7 +24,7 @@ const projectTypes = `
         organizer: Organizer
         beneficiary: Organizer
         numberOfDonations: Int!
-        createdAt: String,
+        createdAt: String
         updatedAt: String
     }
 `;
