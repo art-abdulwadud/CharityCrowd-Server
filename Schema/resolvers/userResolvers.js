@@ -74,6 +74,17 @@ const userResolvers = {
         } catch (error) {
             throw new ApolloError(error.message);
         }
+    },
+    updateUserProfile: async (_root, args) => {
+        try {
+            const { userid, updates } = args;
+            const userDoc = await User.findById(userid);
+            Object.assign(userDoc, updates);
+            await userDoc.save();
+            return "Success";
+        } catch (error) {
+            throw new ApolloError(error.message);
+        }
     }
 };
 

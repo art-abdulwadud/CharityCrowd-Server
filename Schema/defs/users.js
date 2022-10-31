@@ -4,6 +4,11 @@ const userTypes = `
         name: String!
         email: String!
         admin: Boolean
+        phone: String
+        bio: String
+        country: String
+        city: String
+        address: String
         createdAt: String
         updatedAt: String
     }
@@ -32,6 +37,20 @@ const userQueries = `
 
     type Query {
         getAdminUsers(email: String!): [User!]!
+    }
+
+    input UserInput {
+        name: String
+        email: String
+        admin: Boolean
+        phone: String
+        bio: String
+        country: String
+        city: String
+        address: String
+    }
+    type Query {
+        updateUserProfile(userid: ID!, updates: UserInput!): String!
     }
 `;
 
