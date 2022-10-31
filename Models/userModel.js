@@ -9,7 +9,13 @@ const userSchema = new Schema({
     bio: String,
     country: String,
     city: String,
-    address: String
+    address: String,
+    payment: {
+        cardNumber: Number,
+        nameOnCard: String,
+        expiryDate: Date,
+        cvv: String
+    }
 }, { timestamps: true });
 
 const User = mongoose.model("User", userSchema);

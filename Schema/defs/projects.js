@@ -4,11 +4,13 @@ const projectTypes = `
         amount: String
         timestamp: String
     }
+
     type Organizer {
         name: String!
         location: String!
         email: String
     }
+    
     type Project {
         _id: ID!
         name: String!

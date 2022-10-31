@@ -8,7 +8,7 @@
   "scripts": {
     "start": "node index.js",
     "custom": "git add . && git commit -m '.' && git push heroku main",
-    "custom2": "git push heroku main",
+    "push": "git push heroku main",
     "dev": "nodemon index.js"
   },
   "dependencies": {

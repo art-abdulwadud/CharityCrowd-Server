@@ -12,6 +12,10 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 (async () => {
+    const dbURI = `mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@${process.env.DBNAME}.0hyd2qk.mongodb.net/?retryWrites=true&w=majority`;
+    await mongoose.connect(dbURI)
+        .then(() => console.log("Database connected"))
+        .catch((error) => console.log(error));
     app.use(cors({ origin: true }));
     app.use((req, res, next) => {
     // Website you wish to allow to connect
@@ -33,9 +37,5 @@ if (process.env.NODE_ENV !== "production") {
     
     await server.start();
     server.applyMiddleware({ app, path: "/", cors: true });
-    const dbURI = `mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@${process.env.DBNAME}.0hyd2qk.mongodb.net/?retryWrites=true&w=majority`;
-    await mongoose.connect(dbURI)
-        .then(() => console.log("Database connected"))
-        .catch((error) => console.log(error));
     app.listen(process.env.PORT, () => console.log("Server is now running on port 7000"));
 })();

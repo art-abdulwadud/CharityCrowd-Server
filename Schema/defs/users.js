@@ -1,4 +1,10 @@
 const userTypes = `
+    type Payment {
+        cardNumber: Int
+        nameOnCard: String
+        expiryDate: String
+        cvv: String
+    }
     type User {
         _id: ID!
         name: String!
@@ -9,6 +15,7 @@ const userTypes = `
         country: String
         city: String
         address: String
+        payment: Payment
         createdAt: String
         updatedAt: String
     }
