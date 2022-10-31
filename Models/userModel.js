@@ -10,6 +10,7 @@ const userSchema = new Schema({
     country: String,
     city: String,
     address: String,
+    phone: String,
     payment: {
         cardNumber: Number,
         nameOnCard: String,
