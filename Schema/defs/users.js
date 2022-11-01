@@ -46,6 +46,12 @@ const userQueries = `
         getAdminUsers(email: String!): [User!]!
     }
 
+    input PaymentInput {
+        cardNumber: Int
+        nameOnCard: String
+        expiryDate: String
+        cvv: String
+    }
     input UserInput {
         name: String
         email: String
@@ -55,6 +61,7 @@ const userQueries = `
         country: String
         city: String
         address: String
+        payment: PaymentInput
     }
     type Query {
         updateUserProfile(userid: ID!, updates: UserInput!): String!
