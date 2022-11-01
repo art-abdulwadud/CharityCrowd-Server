@@ -5,12 +5,10 @@ const User = require("../../Models/userModel");
 const userResolvers = {
     getUserProfile : async (_root, args) => {
         try {
-            const userDoc = await User.findOne({ _id: args.userid });
-            const { name, email, _id, createdAt, updatedAt } = userDoc;
-            let currentUser = { name: name, email: email, _id: _id, createdAt: createdAt, updatedAt: updatedAt };
-            const fetchedUser = await admin.auth().getUserByEmail(currentUser.email);
-            if (fetchedUser.customClaims && fetchedUser.customClaims.admin === true) currentUser = { ...currentUser, admin: true };
-            return currentUser;
+            const userDoc = await User.findById(args.userid);
+            const fetchedUser = await admin.auth().getUserByEmail(userDoc.email);
+            if (fetchedUser.customClaims && fetchedUser.customClaims.admin === true) Object.assign(userDoc, { admin: true });
+            return userDoc;
         } catch (error) {
             console.log(error.message);
         }

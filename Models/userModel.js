@@ -15,7 +15,7 @@ const userSchema = new Schema({
         cardNumber: Number,
         nameOnCard: String,
         expiryDate: Date,
-        cvv: String
+        cvv: Number
     }
 }, { timestamps: true });
 
