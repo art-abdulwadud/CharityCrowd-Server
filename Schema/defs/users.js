@@ -47,7 +47,7 @@ const userQueries = `
     }
 
     input PaymentInput {
-        cardNumber: Int
+        cardNumber: String
         nameOnCard: String
         expiryDate: String
         cvv: String
