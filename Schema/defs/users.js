@@ -1,6 +1,6 @@
 const userTypes = `
     type Payment {
-        cardNumber: Int
+        cardNumber: String
         nameOnCard: String
         expiryDate: String
         cvv: String

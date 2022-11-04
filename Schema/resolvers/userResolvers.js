@@ -7,7 +7,7 @@ const userResolvers = {
         try {
             const userDoc = await User.findById(args.userid);
             const fetchedUser = await admin.auth().getUserByEmail(userDoc.email);
-            if (fetchedUser.customClaims && fetchedUser.customClaims.admin === true) Object.assign(userDoc, { admin: true });
+            if (fetchedUser.customClaims && fetchedUser.customClaims.admin === true) Object.assign(userDoc, { admin: true, payment: userDoc.payment ? { ...userDoc.payment, cardNumber: userDoc.payment?.cardNumber.toString() } : {} });
             return userDoc;
         } catch (error) {
             console.log(error.message);
