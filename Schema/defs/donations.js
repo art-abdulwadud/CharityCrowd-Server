@@ -2,7 +2,7 @@ const donationTypes = `
     type Donation {
         _id: ID!
         userId: String!
-        amountDonated: Number!
+        amountDonated: Float!
         modeOfPayment: String!
         createdAt: String
         updatedAt: String
@@ -12,7 +12,7 @@ const donationTypes = `
 const donationQueries = `
     input DonationInput {
         userId: String!
-        amountToDonate: Number!,
+        amountToDonate: Float!,
         modeOfPayment: String!,
         payment: PaymentInput!,
         anonymous: Boolean!
