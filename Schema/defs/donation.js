@@ -9,7 +9,8 @@ const donationTypes = `
         _id: ID!
         name: String!
         userId: String!
-        amountDonated: Number
+        amountDonated: Number!
+        modeOfPayment: String!
         createdAt: String
         updatedAt: String
     }
@@ -19,7 +20,8 @@ const donationQueries = `
     input Donation {
         name: String!
         userId: String!
-        amountDonated: Number!
+        amountDonated: Number!,
+        modeOfPayment: String!
     }
     type Query {
         addDonation(donation: Donation!): Donation!
