@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const donationSchema = new Schema({
     userId: String,
-    amountDonated: String,
+    amountDonated: Number,
     modeOfPayment: String
 }, { timestamps: true });
 

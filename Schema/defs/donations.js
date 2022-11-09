@@ -10,6 +10,12 @@ const donationTypes = `
 `;
 
 const donationQueries = `
+    input PaymentInput {
+        cardNumber: String
+        nameOnCard: String
+        expiryDate: String
+        cvv: String
+    }
     input DonationInput {
         userId: String!
         amountToDonate: Float!,
@@ -17,6 +23,7 @@ const donationQueries = `
         payment: PaymentInput!,
         anonymous: Boolean!
         subscribed: Boolean!
+        projectId: String!
     }
     type Query {
         addDonation(donation: DonationInput!): Donation!
