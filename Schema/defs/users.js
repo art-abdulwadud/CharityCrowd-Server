@@ -18,6 +18,7 @@ const userTypes = `
         payment: Payment
         createdAt: String
         updatedAt: String
+        anonymous: Boolean
     }
 `;
 
