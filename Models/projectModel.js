@@ -31,6 +31,8 @@ const projectSchema = new Schema({
         location: String,
         email: String
     },
+    donations: Array,
+    subscribedUsers: Array,
     numberOfDonations: Number
 }, { timestamps: true });
 
