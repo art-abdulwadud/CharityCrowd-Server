@@ -14,13 +14,16 @@ const donationResolvers = {
             const newPayment = new Donation({ userId: userId, amountDonated: amountToDonate, modeOfPayment: modeOfPayment });
             await newPayment.save();
             // if user subscribed to a payment, update user details and project details
+            // If anonymous is true, set anonymous field to true in user document
+            // Add notification of the donation for the user and anyone subscribed
+            const currentUser = await User.findById(userId);
             if (subscribed) {
                 const currentProject = await Project.findById(projectId);
+                Object.assign(currentUser, { subscriptions: currentUser.subscriptions ? [...currentUser.subscriptions, projectId] : [projectId] });
                 Object.assign(currentProject, { subscribedUsers: currentProject.subscribedUsers ? [...currentProject.subscribedUsers, userId] : [userId] });
                 await currentProject.save();
             }
             if (anonymous) {
-                const currentUser = await User.findById(userId);
                 Object.assign(currentUser, { anonymous: true });
                 await currentUser.save();
             }
