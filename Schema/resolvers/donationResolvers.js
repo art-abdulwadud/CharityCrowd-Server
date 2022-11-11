@@ -17,16 +17,14 @@ const donationResolvers = {
             // If anonymous is true, set anonymous field to true in user document
             // Add notification of the donation for the user and anyone subscribed
             const currentUser = await User.findById(userId);
+            const currentProject = await Project.findById(projectId);
             if (subscribed) {
-                const currentProject = await Project.findById(projectId);
                 Object.assign(currentUser, { subscriptions: currentUser.subscriptions ? [...currentUser.subscriptions, projectId] : [projectId] });
                 Object.assign(currentProject, { subscribedUsers: currentProject.subscribedUsers ? [...currentProject.subscribedUsers, userId] : [userId] });
-                await currentProject.save();
             }
-            if (anonymous) {
-                Object.assign(currentUser, { anonymous: true });
-                await currentUser.save();
-            }
+            if (anonymous) Object.assign(currentUser, { anonymous: true });
+            await currentUser.save();
+            await currentProject.save();
             return newPayment;
         } catch (error) {
             throw new ApolloError(error.message);
