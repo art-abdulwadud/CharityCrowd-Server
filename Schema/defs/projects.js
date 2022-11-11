@@ -24,6 +24,8 @@ const projectTypes = `
         organizer: Organizer
         beneficiary: Organizer
         numberOfDonations: Int!
+        subscribedUsers: [String]
+        donations: [String]
         createdAt: String
         updatedAt: String
     }

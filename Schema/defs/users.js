@@ -16,9 +16,12 @@ const userTypes = `
         city: String
         address: String
         payment: Payment
+        anonymous: Boolean
+        subscriptions: [String]
+        projects: [String]
+        donations: [String]
         createdAt: String
         updatedAt: String
-        anonymous: Boolean
     }
 `;
 
