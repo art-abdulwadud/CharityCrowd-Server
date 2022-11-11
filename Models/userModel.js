@@ -17,7 +17,6 @@ const userSchema = new Schema({
         expiryDate: Date,
         cvv: Number
     },
-    donations: Array,
     subscriptions: Array
 }, { timestamps: true });
 

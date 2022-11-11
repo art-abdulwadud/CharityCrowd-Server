@@ -17,9 +17,7 @@ const userTypes = `
         address: String
         payment: Payment
         anonymous: Boolean
-        subscriptions: [String]
-        projects: [String]
-        donations: [String]
+        subscriptions: [[String]]
         createdAt: String
         updatedAt: String
     }

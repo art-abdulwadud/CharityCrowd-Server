@@ -2,6 +2,7 @@ const donationTypes = `
     type Donation {
         _id: ID!
         userId: String!
+        projectId: String!
         amountDonated: Float!
         modeOfPayment: String!
         createdAt: String

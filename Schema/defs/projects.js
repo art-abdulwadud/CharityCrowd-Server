@@ -1,6 +1,6 @@
 const projectTypes = `
     type Donation {
-        name: String
+        userId: String
         amount: String
         timestamp: String
     }
@@ -24,8 +24,7 @@ const projectTypes = `
         organizer: Organizer
         beneficiary: Organizer
         numberOfDonations: Int!
-        subscribedUsers: [String]
-        donations: [String]
+        subscribedUsers: [[String]]
         createdAt: String
         updatedAt: String
     }
