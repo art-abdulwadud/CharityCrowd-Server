@@ -42,6 +42,14 @@ const donationResolvers = {
         } catch (error) {
             throw new ApolloError(error.message);
         }
+    },
+    getDonationsByUserId: async (_root, args) => {
+        try {
+            const donations = await Donation.find({ userId: args.userid }).sort({ createdAt: -1 });
+            return donations;
+        } catch (error) {
+            throw new ApolloError(error.message);
+        }
     }
 };
 
