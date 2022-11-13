@@ -22,8 +22,8 @@ const donationResolvers = {
             if (currentProject.numberOfDonations != 0) Object.assign(currentProject, { lastDonation: donationStats});
             if (!currentProject.lastDonation || currentProject.lastDonation?.toString() < amountToDonate) Object.assign(currentProject, { topDonation: donationStats });
             if (subscribed && subscribed === true) {
-                currentUser.subscriptions.push([projectId, amountToDonate]);
-                currentProject.subscribedUsers.push([userId, amountToDonate]);
+                await new User.updateOne({ _id: userId }, { $addToSet: { subscriptions: [projectId, amountToDonate] } });
+                await new Project.updateOne({ _id: projectId }, { $addToSet: { subscribedUsers: [userId, amountToDonate] } });
             }
             if (anonymous && anonymous === true) Object.assign(currentUser, { anonymous: true });
             Object.assign(currentProject, { currentAmount: currentAmount, numberOfDonations: parseInt(currentProject.numberOfDonations) + 1 });
