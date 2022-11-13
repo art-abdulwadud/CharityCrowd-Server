@@ -16,7 +16,9 @@ const userSchema = new Schema({
         nameOnCard: String,
         expiryDate: Date,
         cvv: Number
-    }
+    },
+    anonymous: Boolean,
+    subscriptions: Array
 }, { timestamps: true });
 
 const User = mongoose.model("User", userSchema);

@@ -7,24 +7,54 @@ const Project = require("../../Models/projectModel");
 const donationResolvers = {
     addDonation : async (_root, args) => {
         try {
+            // TODO: Check if user is logged in first
             const { donation } = args;
             const { userId, amountToDonate, modeOfPayment, subscribed, projectId, anonymous } = donation;
             // TODO: add api for verifing and making payment
             // Once payment is verified and made, continue 👇
-            const newPayment = new Donation({ userId: userId, amountDonated: amountToDonate, modeOfPayment: modeOfPayment });
+            const newPayment = new Donation({ userId: userId, projectId: projectId, amountDonated: amountToDonate, modeOfPayment: modeOfPayment, anonymous: anonymous });
             await newPayment.save();
-            // if user subscribed to a payment, update user details and project details
-            if (subscribed) {
-                const currentProject = await Project.findById(projectId);
-                Object.assign(currentProject, { subscribedUsers: currentProject.subscribedUsers ? [...currentProject.subscribedUsers, userId] : [userId] });
-                await currentProject.save();
+            // Add notification of the donation for the user and anyone subscribed
+            const currentUser = await User.findById(userId);
+            const currentProject = await Project.findById(projectId);
+            const currentAmount = parseFloat(currentProject.currentAmount) + parseFloat(amountToDonate);
+            const donationStats = { userId: userId, amount: amountToDonate, timestamp: newPayment.createdAt };
+            if (currentProject.numberOfDonations == 0) Object.assign(currentProject, { firstDonation: donationStats});
+            if (currentProject.numberOfDonations != 0) Object.assign(currentProject, { lastDonation: donationStats});
+            if (!currentProject.lastDonation || currentProject.lastDonation?.toString() < amountToDonate) Object.assign(currentProject, { topDonation: donationStats });
+            if (subscribed && subscribed === true) {
+                await new User.updateOne({ _id: userId }, { $addToSet: { subscriptions: [projectId, amountToDonate] } });
+                await new Project.updateOne({ _id: projectId }, { $addToSet: { subscribedUsers: [userId, amountToDonate] } });
             }
-            if (anonymous) {
-                const currentUser = await User.findById(userId);
-                Object.assign(currentUser, { anonymous: true });
-                await currentUser.save();
-            }
+            if (anonymous && anonymous === true) Object.assign(currentUser, { anonymous: true });
+            Object.assign(currentProject, { currentAmount: currentAmount, numberOfDonations: parseInt(currentProject.numberOfDonations) + 1 });
+            await currentUser.save();
+            await currentProject.save();
             return newPayment;
+        } catch (error) {
+            throw new ApolloError(error.message);
+        }
+    },
+    getDonationsByProjectId: async (_root, args) => {
+        try {
+            const donations = await Donation.find({ projectId: args.projectid }).sort({ createdAt: -1 });
+            return donations;
+        } catch (error) {
+            throw new ApolloError(error.message);
+        }
+    },
+    getDonationsByUserId: async (_root, args) => {
+        try {
+            const donations = await Donation.find({ userId: args.userid }).sort({ createdAt: -1 });
+            return donations;
+        } catch (error) {
+            throw new ApolloError(error.message);
+        }
+    },
+    getDonationsByProjectUserId: async (_root, args) => {
+        try {
+            const donations = await Donation.find({ userId: args.userid, projectId: args.projectid }).sort({ createdAt: -1 });
+            return donations;
         } catch (error) {
             throw new ApolloError(error.message);
         }

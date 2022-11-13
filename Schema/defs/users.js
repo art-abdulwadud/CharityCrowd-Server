@@ -16,9 +16,10 @@ const userTypes = `
         city: String
         address: String
         payment: Payment
+        anonymous: Boolean
+        subscriptions: [[String]]
         createdAt: String
         updatedAt: String
-        anonymous: Boolean
     }
 `;
 

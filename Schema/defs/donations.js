@@ -2,6 +2,7 @@ const donationTypes = `
     type Donation {
         _id: ID!
         userId: String!
+        projectId: String!
         amountDonated: Float!
         modeOfPayment: String!
         createdAt: String
@@ -27,6 +28,18 @@ const donationQueries = `
     }
     type Query {
         addDonation(donation: DonationInput!): Donation!
+    }
+
+    type Query {
+        getDonationsByProjectId(projectid: String!): [Donation]!
+    }
+
+    type Query {
+        getDonationsByUserId(userid: String!): [Donation]!
+    }
+
+    type Query {
+        getDonationsByProjectUserId(projectid: String!, userid: String!): [Donation]!
     }
 `;
 

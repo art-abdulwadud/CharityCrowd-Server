@@ -6,17 +6,17 @@ const projectSchema = new Schema({
     requiredAmount: Number,
     currentAmount: Number,
     firstDonation: {
-        name: String,
+        userId: String,
         amount: String,
         timestamp: Date
     },
     topDonation: {
-        name: String,
+        userId: String,
         amount: String,
         timestamp: Date
     },
     lastDonation: {
-        name: String,
+        userId: String,
         amount: String,
         timestamp: Date
     },
@@ -31,6 +31,7 @@ const projectSchema = new Schema({
         location: String,
         email: String
     },
+    subscribedUsers: Array,
     numberOfDonations: Number
 }, { timestamps: true });
 
