@@ -7,6 +7,7 @@ const Project = require("../../Models/projectModel");
 const donationResolvers = {
     addDonation : async (_root, args) => {
         try {
+            // TODO: Check if user is logged in first
             const { donation } = args;
             const { userId, amountToDonate, modeOfPayment, subscribed, projectId, anonymous } = donation;
             // TODO: add api for verifing and making payment
@@ -30,6 +31,14 @@ const donationResolvers = {
             await currentUser.save();
             await currentProject.save();
             return newPayment;
+        } catch (error) {
+            throw new ApolloError(error.message);
+        }
+    },
+    getDonationsByProjectId: async (_root, args) => {
+        try {
+            const donations = await Donation.find({ projectId: args.projectid }).sort({ createdAt: -1 });
+            return donations;
         } catch (error) {
             throw new ApolloError(error.message);
         }
