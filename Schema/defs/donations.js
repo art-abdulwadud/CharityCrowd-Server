@@ -29,6 +29,18 @@ const donationQueries = `
     type Query {
         addDonation(donation: DonationInput!): Donation!
     }
+
+    type Query {
+        getDonationsByProjectId(projectid: String!): [Donation]!
+    }
+
+    type Query {
+        getDonationsByUserId(userid: String!): [Donation]!
+    }
+
+    type Query {
+        getDonationsByProjectUserId(projectid: String!, userid: String!): [Donation]!
+    }
 `;
 
 module.exports = { donationTypes, donationQueries };
