@@ -32,6 +32,7 @@ const userResolvers = {
             await userDoc.save();
             return userDoc;
         } catch (error) {
+            console.log(error.message);
             throw new ApolloError(error.message);
         }
     },

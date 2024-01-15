@@ -7,6 +7,7 @@ const donationTypes = `
         modeOfPayment: String!
         createdAt: String
         updatedAt: String
+        anonymous: Boolean
     }
 `;
 

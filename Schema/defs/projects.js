@@ -3,6 +3,7 @@ const projectTypes = `
         userId: String
         amount: String
         timestamp: String
+        anonymous: Boolean
     }
 
     type Organizer {
