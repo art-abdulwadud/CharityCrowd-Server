@@ -28,6 +28,7 @@ const projectTypes = `
         subscribedUsers: [[String]]
         createdAt: String
         updatedAt: String
+        userId: String!
     }
 `;
 
@@ -43,6 +44,7 @@ const projectQueries = `
         requiredAmount: Float!
         organizer: OrganizerInput
         beneficiary: OrganizerInput
+        userId: String!
     }
     type Query {
         addAProject(currentUser: String!, project: ProjectInput!): Project!
