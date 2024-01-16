@@ -32,7 +32,8 @@ const projectSchema = new Schema({
         email: String
     },
     subscribedUsers: Array,
-    numberOfDonations: Number
+    numberOfDonations: Number,
+    userId: String
 }, { timestamps: true });
 
 const Project = mongoose.model("Project", projectSchema);
