@@ -44,10 +44,13 @@ const projectQueries = `
         requiredAmount: Float!
         organizer: OrganizerInput
         beneficiary: OrganizerInput
-        userId: String!
+        userId: String
     }
     type Query {
         addAProject(currentUser: String!, project: ProjectInput!): Project!
+    }
+    type Query {
+        editProject(currentUser: String!, project: ProjectInput!): Project!
     }
 
     type Query {
