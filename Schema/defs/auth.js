@@ -9,7 +9,7 @@ const authQueries = `
         member: Boolean
     }
 
-    type Query {
+    type Mutation {
         addCustomClaim(currentUser: String!, userid: ID!, claim: Obj!): String
     }
 `;

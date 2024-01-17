@@ -11,13 +11,13 @@ const resolvers = {
     // Queries
     Query: {
         ...userQueryResolvers,
-        ...authResolvers,
         ...projectResolvers,
         ...donationResolvers
     },
     // Mutations
     Mutation: {
-        ...userMutationResolvers
+        ...userMutationResolvers,
+        ...authResolvers
     }
 };
 
