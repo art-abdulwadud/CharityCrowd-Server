@@ -1,7 +1,7 @@
 /* eslint-disable use-isnan */
 // const { db } = require("../admin");
 const { authResolvers } = require("./resolvers/authResolvers");
-const { donationResolvers } = require("./resolvers/donationResolvers");
+const { donationResolvers, donationMutationResolvers } = require("./resolvers/donationResolvers");
 const { projectResolvers, projectMutationResolvers } = require("./resolvers/projectResolvers");
 const { userQueryResolvers, userMutationResolvers } = require("./resolvers/userResolvers");
 
@@ -18,7 +18,8 @@ const resolvers = {
     Mutation: {
         ...userMutationResolvers,
         ...authResolvers,
-        ...projectMutationResolvers
+        ...projectMutationResolvers,
+        ...donationMutationResolvers
     }
 };
 

@@ -5,6 +5,33 @@ const User = require("../../Models/userModel");
 const Project = require("../../Models/projectModel");
 
 const donationResolvers = {
+    getDonationsByProjectId: async (_root, args) => {
+        try {
+            const donations = await Donation.find({ projectId: args.projectid }).sort({ createdAt: -1 });
+            return donations;
+        } catch (error) {
+            throw new ApolloError(error.message);
+        }
+    },
+    getDonationsByUserId: async (_root, args) => {
+        try {
+            const donations = await Donation.find({ userId: args.userid }).sort({ createdAt: -1 });
+            return donations;
+        } catch (error) {
+            throw new ApolloError(error.message);
+        }
+    },
+    getDonationsByProjectUserId: async (_root, args) => {
+        try {
+            const donations = await Donation.find({ userId: args.userid, projectId: args.projectid }).sort({ createdAt: -1 });
+            return donations;
+        } catch (error) {
+            throw new ApolloError(error.message);
+        }
+    }
+};
+
+const donationMutationResolvers = {
     addDonation : async (_root, args) => {
         try {
             // TODO: Check if user is logged in first
@@ -34,31 +61,7 @@ const donationResolvers = {
         } catch (error) {
             throw new ApolloError(error.message);
         }
-    },
-    getDonationsByProjectId: async (_root, args) => {
-        try {
-            const donations = await Donation.find({ projectId: args.projectid }).sort({ createdAt: -1 });
-            return donations;
-        } catch (error) {
-            throw new ApolloError(error.message);
-        }
-    },
-    getDonationsByUserId: async (_root, args) => {
-        try {
-            const donations = await Donation.find({ userId: args.userid }).sort({ createdAt: -1 });
-            return donations;
-        } catch (error) {
-            throw new ApolloError(error.message);
-        }
-    },
-    getDonationsByProjectUserId: async (_root, args) => {
-        try {
-            const donations = await Donation.find({ userId: args.userid, projectId: args.projectid }).sort({ createdAt: -1 });
-            return donations;
-        } catch (error) {
-            throw new ApolloError(error.message);
-        }
     }
 };
 
-module.exports = { donationResolvers };
+module.exports = { donationResolvers, donationMutationResolvers };
