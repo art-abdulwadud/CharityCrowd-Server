@@ -9,9 +9,7 @@ const donationTypes = `
         updatedAt: String
         anonymous: Boolean
     }
-`;
 
-const donationQueries = `
     input PaymentInput {
         cardNumber: String
         nameOnCard: String
@@ -27,10 +25,9 @@ const donationQueries = `
         subscribed: Boolean!
         projectId: String!
     }
-    type Query {
-        addDonation(donation: DonationInput!): Donation!
-    }
+`;
 
+const donationQueries = `
     type Query {
         getDonationsByProjectId(projectid: String!): [Donation]!
     }
@@ -41,6 +38,10 @@ const donationQueries = `
 
     type Query {
         getDonationsByProjectUserId(projectid: String!, userid: String!): [Donation]!
+    }
+
+    type Mutation {
+        addDonation(donation: DonationInput!): Donation!
     }
 `;
 
