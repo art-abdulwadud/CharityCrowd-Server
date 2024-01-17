@@ -3,19 +3,22 @@
 const { authResolvers } = require("./resolvers/authResolvers");
 const { donationResolvers } = require("./resolvers/donationResolvers");
 const { projectResolvers } = require("./resolvers/projectResolvers");
-const { userResolvers } = require("./resolvers/userResolvers");
+const { userQueryResolvers, userMutationResolvers } = require("./resolvers/userResolvers");
 
 const resolvers = {
     // Scalars
 
     // Queries
     Query: {
-        ...userResolvers,
+        ...userQueryResolvers,
         ...authResolvers,
         ...projectResolvers,
         ...donationResolvers
     },
     // Mutations
+    Mutation: {
+        ...userMutationResolvers
+    }
 };
 
 module.exports = resolvers;
