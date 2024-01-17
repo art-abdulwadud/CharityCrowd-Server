@@ -21,6 +21,24 @@ const userTypes = `
         createdAt: String
         updatedAt: String
     }
+
+    input PaymentInput {
+        cardNumber: String
+        nameOnCard: String
+        expiryDate: String
+        cvv: String
+    }
+    input UserInput {
+        name: String
+        email: String
+        admin: Boolean
+        phone: String
+        bio: String
+        country: String
+        city: String
+        address: String
+        payment: PaymentInput
+    }
 `;
 
 const userQueries = `
@@ -44,24 +62,6 @@ const userQueries = `
         getAdminUsers(email: String!): [User!]!
     }
 
-    input PaymentInput {
-        cardNumber: String
-        nameOnCard: String
-        expiryDate: String
-        cvv: String
-    }
-    input UserInput {
-        name: String
-        email: String
-        admin: Boolean
-        phone: String
-        bio: String
-        country: String
-        city: String
-        address: String
-        payment: PaymentInput
-    }
-    
     type Mutation {
         signUpUser(email: String!, password: String!): User!
     }

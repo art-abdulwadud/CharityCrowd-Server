@@ -30,9 +30,7 @@ const projectTypes = `
         updatedAt: String
         userId: String!
     }
-`;
 
-const projectQueries = `
     input OrganizerInput {
         name: String!
         location: String
@@ -47,19 +45,23 @@ const projectQueries = `
         userId: String
         id: String
     }
-    type Query {
-        addAProject(currentUser: String!, project: ProjectInput!): Project!
-    }
-    type Query {
-        editProject(currentUser: String!, project: ProjectInput!): Project!
-    }
+`;
 
+const projectQueries = `
     type Query {
         getAllProjects: [Project]!
     }
 
     type Query {
         getProjectById(projectid: ID!): Project!
+    }
+
+    type Mutation {
+        addAProject(currentUser: String!, project: ProjectInput!): Project!
+    }
+    
+    type Mutation {
+        editProject(currentUser: String!, project: ProjectInput!): Project!
     }
 `;
 
