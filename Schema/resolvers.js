@@ -2,7 +2,7 @@
 // const { db } = require("../admin");
 const { authResolvers } = require("./resolvers/authResolvers");
 const { donationResolvers } = require("./resolvers/donationResolvers");
-const { projectResolvers } = require("./resolvers/projectResolvers");
+const { projectResolvers, projectMutationResolvers } = require("./resolvers/projectResolvers");
 const { userQueryResolvers, userMutationResolvers } = require("./resolvers/userResolvers");
 
 const resolvers = {
@@ -17,7 +17,8 @@ const resolvers = {
     // Mutations
     Mutation: {
         ...userMutationResolvers,
-        ...authResolvers
+        ...authResolvers,
+        ...projectMutationResolvers
     }
 };
 
