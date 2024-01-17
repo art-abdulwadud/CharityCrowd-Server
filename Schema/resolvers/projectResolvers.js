@@ -17,6 +17,18 @@ const projectResolvers = {
             throw new ApolloError(error.message);
         }
     },
+    editProject : async (_root, args) => {
+        try {
+            const { project, currentUser } = args;
+            if (currentUser !== project.userId) throw new ApolloError("Insuficient permissions");
+            const projectDoc = await Project.findById(project.id);
+            Object.assign(projectDoc, project);
+            await projectDoc.save();
+            return projectDoc;
+        } catch (error) {
+            throw new ApolloError(error.message);
+        }
+    },
     getAllProjects: async () => {
         try {
             const projectList = await Project.find().sort({ createdAt: -1 });

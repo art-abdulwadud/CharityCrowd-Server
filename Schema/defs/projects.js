@@ -45,6 +45,7 @@ const projectQueries = `
         organizer: OrganizerInput
         beneficiary: OrganizerInput
         userId: String
+        id: String
     }
     type Query {
         addAProject(currentUser: String!, project: ProjectInput!): Project!
