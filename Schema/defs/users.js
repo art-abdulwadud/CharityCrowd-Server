@@ -25,10 +25,6 @@ const userTypes = `
 
 const userQueries = `
     type Query {
-        signUpUser(email: String!, password: String!): User!
-    }
-
-    type Query {
         getUserProfile(userid: String!): User!
     }
 
@@ -65,7 +61,12 @@ const userQueries = `
         address: String
         payment: PaymentInput
     }
-    type Query {
+    
+    type Mutation {
+        signUpUser(email: String!, password: String!): User!
+    }
+
+    type Mutation {
         updateUserProfile(userid: ID!, updates: UserInput!): String!
     }
 `;
