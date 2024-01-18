@@ -19,13 +19,13 @@ Welcome to the backend repository of CharityCrowd, a platform that empowers user
 - **User Management:**
   - Admin users can view list of all users
   - Admin users can manage user roles.
+  - Admin users can access Admin Page
 - **Project Management:**
   - Users can add projects.
   - Users can donate to projects.
   - Anonymous donations are supported.
 - **Authentication and Authorization:**
   - JWT-based authentication.
-  - Admin users can access Admin Page
 
 ## Getting Started
 
