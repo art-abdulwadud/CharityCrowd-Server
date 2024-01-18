@@ -10,7 +10,7 @@ const userQueryResolvers = {
             if (fetchedUser.customClaims && fetchedUser.customClaims.admin === true) Object.assign(userDoc, { admin: true, payment: userDoc.payment ? { ...userDoc.payment, cardNumber: userDoc.payment?.cardNumber?.toString() } : {} });
             return userDoc;
         } catch (error) {
-            throw new ApolloError(error.message);
+            return new ApolloError(error.message);
         }
     },
     getRecentUsers : async (_root, args) => {
@@ -20,9 +20,9 @@ const userQueryResolvers = {
                 const userList = await User.find().sort({ createdAt: -1 });
                 return userList;
             }
-            throw new ApolloError("Unauthorised request");
+            return new ApolloError("Unauthorised request");
         } catch (error) {
-            throw new ApolloError(error.message);
+            return new ApolloError(error.message);
         }
     },
     getAdminUsers : async (_root, args) => {
@@ -32,9 +32,9 @@ const userQueryResolvers = {
                 const userList = await User.find().where("admin").equals(true);
                 return userList;
             }
-            throw new ApolloError("Unauthorised request");
+            return new ApolloError("Unauthorised request");
         } catch (error) {
-            throw new ApolloError(error.message);
+            return new ApolloError(error.message);
         }
     },
     getUserRole : async (_root, args) => {
@@ -46,9 +46,9 @@ const userQueryResolvers = {
                 if (requestedUser.customClaims && requestedUser.customClaims.admin === true) results = { admin: true };
                 return results;
             }
-            throw new ApolloError("Unauthorised request");
+            return new ApolloError("Unauthorised request");
         } catch (error) {
-            throw new ApolloError(error.message);
+            return new ApolloError(error.message);
         }
     }
 };
@@ -73,7 +73,7 @@ const userMutationResolvers = {
             await userDoc.save();
             return userDoc;
         } catch (error) {
-            throw new ApolloError(error.message);
+            return new ApolloError(error.message);
         }
     },
     updateUserProfile: async (_root, args) => {
@@ -84,7 +84,7 @@ const userMutationResolvers = {
             await userDoc.save();
             return "Success";
         } catch (error) {
-            throw new ApolloError(error.message);
+            return new ApolloError(error.message);
         }
     }
 };

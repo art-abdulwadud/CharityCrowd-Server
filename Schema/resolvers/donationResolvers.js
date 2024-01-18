@@ -10,7 +10,7 @@ const donationResolvers = {
             const donations = await Donation.find({ projectId: args.projectid }).sort({ createdAt: -1 });
             return donations;
         } catch (error) {
-            throw new ApolloError(error.message);
+            return new ApolloError(error.message);
         }
     },
     getDonationsByUserId: async (_root, args) => {
@@ -18,7 +18,7 @@ const donationResolvers = {
             const donations = await Donation.find({ userId: args.userid }).sort({ createdAt: -1 });
             return donations;
         } catch (error) {
-            throw new ApolloError(error.message);
+            return new ApolloError(error.message);
         }
     },
     getDonationsByProjectUserId: async (_root, args) => {
@@ -26,7 +26,7 @@ const donationResolvers = {
             const donations = await Donation.find({ userId: args.userid, projectId: args.projectid }).sort({ createdAt: -1 });
             return donations;
         } catch (error) {
-            throw new ApolloError(error.message);
+            return new ApolloError(error.message);
         }
     }
 };
@@ -59,7 +59,7 @@ const donationMutationResolvers = {
             await currentProject.save();
             return newPayment;
         } catch (error) {
-            throw new ApolloError(error.message);
+            return new ApolloError(error.message);
         }
     }
 };

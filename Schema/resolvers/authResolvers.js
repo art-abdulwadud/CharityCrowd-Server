@@ -13,9 +13,9 @@ const authResolvers = {
                 await user.save();
                 return "Success";
             }
-            throw new ApolloError("Unauthorised request");
+            return new ApolloError("Unauthorised request");
         } catch (error) {
-            throw new ApolloError(error.message);
+            return new ApolloError(error.message);
         }
     }
 };
