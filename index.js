@@ -16,7 +16,7 @@ if (process.env.NODE_ENV !== "production") {
     await mongoose.connect(dbURI)
         .then(() => console.log("Database connected"))
         .catch((error) => console.log(error));
-    app.use(cors({ origin: ["http://localhost:8000"] }));
+    app.use(cors({ origin: ["http://localhost:8000","https://charitycrowd-ke.web.app"] }));
     app.use((req, res, next) => {
     // Website you wish to allow to connect
         //http://localhost:8000
