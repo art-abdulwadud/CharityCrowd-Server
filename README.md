@@ -17,7 +17,7 @@ Welcome to the backend repository of CharityCrowd, a platform that empowers user
 ## Features
 
 - **User Management:**
-  - Users can create accounts.
+  - Admin users can view list of all users
   - Admin users can manage user roles.
 - **Project Management:**
   - Users can add projects.
@@ -25,13 +25,13 @@ Welcome to the backend repository of CharityCrowd, a platform that empowers user
   - Anonymous donations are supported.
 - **Authentication and Authorization:**
   - JWT-based authentication.
-  - Admin users have additional privileges.
+  - Admin users can access Admin Page
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js (version X.X.X)
+- Node.js (version 18)
 - npm or yarn
 - MongoDB (make sure it's running locally or provide connection details)
 
@@ -40,8 +40,9 @@ Welcome to the backend repository of CharityCrowd, a platform that empowers user
 1. Clone the repository and install dependencies:
 
    ```bash
-   git clone https://github.com/your-username/charitycrowd-backend.git
-   yarn
+   git clone https://github.com/art-abdulwadud/CharityCrowd-Server.git
+   cd CharityCrowd-Server
+   yarn or npm install
    ```
 2. Set up environment variables
 3. Run the server:
@@ -63,9 +64,9 @@ auth_uri=""
 token_uri=""
 auth_provider_x509_cert_url=""
 client_x509_cert_url=""
+DBNAME = ""
 USERNAME = ""
 PASSWORD = ""
-DBNAME = ""
 ```
 Make sure to replace the placeholder values with your actual configuration.
 
