@@ -11,14 +11,15 @@ if (process.env.NODE_ENV !== "production") {
     require("dotenv").config({ path: "./.env" });
 }
 
+
 (async () => {
     const dbURI = `mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@${process.env.DBNAME}.0hyd2qk.mongodb.net/?retryWrites=true&w=majority`;
     await mongoose.connect(dbURI)
         .then(() => console.log("Database connected"))
         .catch((error) => console.log(error));
-    app.use(cors({ origin: ["http://localhost:8000","https://charitycrowd-ke.web.app"] }));
+    app.use(cors({ origin: ["http://localhost:8000", "https://charitycrowd-ke.web.app"] }));
     app.use((req, res, next) => {
-    // Website you wish to allow to connect
+        // Website you wish to allow to connect
         //http://localhost:8000
         // https://fund-project.netlify.app
         res.setHeader("Access-Control-Allow-Origin", "http://localhost:8000");
@@ -27,14 +28,14 @@ if (process.env.NODE_ENV !== "production") {
     });
 
 
-    const server = new ApolloServer({ 
-        typeDefs, 
+    const server = new ApolloServer({
+        typeDefs,
         resolvers,
         plugins: [
             ApolloServerPluginLandingPageLocalDefault({ embed: true })
         ]
     });
-    
+
     await server.start();
     server.applyMiddleware({ app, path: "/", cors: true });
     app.listen(process.env.PORT, () => console.log("Server is now running on port 7000"));
